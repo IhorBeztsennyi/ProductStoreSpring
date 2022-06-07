@@ -1,0 +1,40 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'ua.goit'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	postgreSQLVersion = '42.3.4'
+	jstlVersion = '1.2'
+	mockitoVersion = '4.0.0'
+	springSecurityVersion = '5.2.12.RELEASE'
+}
+
+dependencies {
+	implementation "org.postgresql:postgresql:${postgreSQLVersion}"
+	implementation "jstl:jstl:${jstlVersion}"
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+	implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: "${springSecurityVersion}"
+
+	implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.34'
+	testImplementation group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.2.0"
+	testImplementation group: 'org.springframework.security', name: 'spring-security-test'
+	testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+	testImplementation group: 'com.h2database', name: 'h2', version: '2.1.212'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
