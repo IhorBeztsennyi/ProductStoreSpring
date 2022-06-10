@@ -5,17 +5,9 @@ import org.springframework.stereotype.Service;
 import ua.goit.model.dao.UserDao;
 import ua.goit.model.dto.UserDto;
 
-import java.util.stream.Collectors;
 
 @Service
-public class UserConverter implements Converter<UserDao, UserDto>{
-
-    private final RoleConverter roleConverter;
-
-    @Autowired
-    public UserConverter(RoleConverter roleConverter) {
-        this.roleConverter = roleConverter;
-    }
+public class UserConverter implements Converter<UserDao, UserDto> {
 
     @Override
     public UserDto daoToDto(UserDao type) {
@@ -25,9 +17,7 @@ public class UserConverter implements Converter<UserDao, UserDto>{
         user.setPassword(type.getPassword());
         user.setFirstName(type.getFirstName());
         user.setLastName(type.getLastName());
-        user.setRoles(type.getRoles().stream()
-                .map(roleConverter::daoToDto)
-                .collect(Collectors.toSet()));
+        user.setRole(type.getRole());
         return user;
     }
 
@@ -39,9 +29,7 @@ public class UserConverter implements Converter<UserDao, UserDto>{
         user.setPassword(type.getPassword());
         user.setFirstName(type.getFirstName());
         user.setLastName(type.getLastName());
-        user.setRoles(type.getRoles().stream()
-                .map(roleConverter::dtoToDao)
-                .collect(Collectors.toSet()));
+        user.setRole(type.getRole());
         return user;
     }
 }

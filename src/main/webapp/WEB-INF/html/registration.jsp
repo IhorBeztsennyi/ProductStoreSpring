@@ -16,10 +16,10 @@
 
  <div class="container">
      <form:form method="post" modelAttribute="userForm" class="form-signin" action="/users/registration">
-         <h2 class="form-signin-heading">Create your account</h2>
+         <h2 class="form-signin-heading">Create account</h2>
          <spring:bind path="firstName">
              <div class="form-group ${status.error ? 'has-error' : ''}">
-                 <form:input type="text" path="firstName" class="form-control" placeholder="first name"
+                 <form:input type="text" path="firstName" class="form-control" placeholder="First name"
                              autofocus="true"></form:input>
                  <form:errors path="firstName"></form:errors>
              </div>
@@ -27,18 +27,18 @@
 
          <spring:bind path="lastName">
              <div class="form-group ${status.error ? 'has-error' : ''}">
-                 <form:input type="text" path="lastName" class="form-control" placeholder="last name"
+                 <form:input type="text" path="lastName" class="form-control" placeholder="Last name"
                              autofocus="true"></form:input>
                  <form:errors path="lastName"></form:errors>
              </div>
          </spring:bind>
 
          <span>${message}</span>
-         <spring:bind path="userName">
+         <spring:bind path="email">
              <div class="form-group ${status.error ? 'has-error' : ''}">
-                 <form:input type="text" path="userName" class="form-control" placeholder="Username(use email as user name)"
+                 <form:input type="text" path="email" class="form-control" placeholder="Email"
                              autofocus="true"></form:input>
-                 <form:errors path="userName"></form:errors>
+                 <form:errors path="email"></form:errors>
              </div>
          </spring:bind>
 

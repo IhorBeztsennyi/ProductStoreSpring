@@ -6,6 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "product")
+@Cacheable
 public class ProductDao {
     private UUID id;
     private String name;
@@ -23,7 +24,7 @@ public class ProductDao {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public UUID getId() {
         return id;
     }
@@ -51,7 +52,7 @@ public class ProductDao {
     }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "vendor_id", insertable = false, updatable = false)
+    @JoinColumn(name = "vendor_id", nullable = false)
     public VendorDao getVendor() {
         return vendor;
     }

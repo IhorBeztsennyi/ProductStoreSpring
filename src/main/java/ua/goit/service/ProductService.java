@@ -3,9 +3,13 @@ package ua.goit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.goit.converter.ProductConverter;
+import ua.goit.exceptions.ProductIsAlreadyExistsException;
 import ua.goit.exceptions.ProductNotFoundException;
+import ua.goit.exceptions.VendorIsAlreadyExistsException;
 import ua.goit.model.dao.ProductDao;
+import ua.goit.model.dao.VendorDao;
 import ua.goit.model.dto.ProductDto;
+import ua.goit.model.dto.VendorDto;
 import ua.goit.repository.ProductRepository;
 
 import java.util.List;
@@ -30,7 +34,7 @@ public class ProductService {
     }
 
     public List<ProductDto> findByName(String name){
-        List<ProductDao> productsDao = productRepository.findByName(name);
+        List<ProductDao> productsDao = productRepository.findByNameList(name);
         return productsDao.stream()
                 .map(productConverter::daoToDto)
                 .collect(Collectors.toList());
@@ -44,5 +48,30 @@ public class ProductService {
     }
 
     public void save(ProductDto product) {
+        Optional<ProductDao> productDao = productRepository.findByName(product.getName());
+        if (productDao.isEmpty()) {
+            productRepository.save(productConverter.dtoToDao(product));
+        } else {
+            throw new ProductIsAlreadyExistsException(String.format("Product with name %s is already exists", product.getName()));
+        }
+    }
+
+    public void update(ProductDto product) {
+        Optional<ProductDao> productDao = productRepository.findById(product.getId());
+        if (productDao.isPresent()) {
+            productDao.get().setName(product.getName());
+            productDao.get().setPrice(product.getPrice());
+        } else {
+            throw new ProductIsAlreadyExistsException(String.format("Product with id %s is not exists", product.getName()));
+        }
+    }
+
+    public void delete(ProductDto product) {
+        Optional<ProductDao> productDao = productRepository.findByName(product.getName());
+        if (productDao.isPresent()) {
+            productRepository.delete(productDao.get());
+        } else {
+            throw new ProductIsAlreadyExistsException(String.format("Vendor with id %s is not exists", product.getName()));
+        }
     }
 }

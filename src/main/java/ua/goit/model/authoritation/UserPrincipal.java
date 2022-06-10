@@ -3,12 +3,10 @@ package ua.goit.model.authoritation;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ua.goit.model.dto.RoleDto;
 import ua.goit.model.dto.UserDto;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
 
@@ -21,9 +19,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRoles().stream()
-                .map(RoleDto::getName)
-                .toString()));
+        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().getRole()));
     }
 
     @Override

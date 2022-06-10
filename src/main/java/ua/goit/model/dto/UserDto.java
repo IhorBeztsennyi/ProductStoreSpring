@@ -1,6 +1,9 @@
 package ua.goit.model.dto;
 
-import java.util.Set;
+import ua.goit.model.RolesEnum;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
 public class UserDto {
@@ -9,18 +12,18 @@ public class UserDto {
     private String password;
     private String firstName;
     private String lastName;
-    private Set<RoleDto> roles;
+    private RolesEnum role;
 
     public UserDto() {
     }
 
-    public UserDto(UUID id, String email, String password, String firstName, String lastName, Set<RoleDto> roles) {
+    public UserDto(UUID id, String email, String password, String firstName, String lastName, RolesEnum role) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.roles = roles;
+        this.role = role;
     }
 
     public UUID getId() {
@@ -31,6 +34,7 @@ public class UserDto {
         this.id = id;
     }
 
+    @Email
     public String getEmail() {
         return email;
     }
@@ -39,6 +43,7 @@ public class UserDto {
         this.email = email;
     }
 
+    @NotEmpty
     public String getPassword() {
         return password;
     }
@@ -47,6 +52,7 @@ public class UserDto {
         this.password = password;
     }
 
+    @NotEmpty
     public String getFirstName() {
         return firstName;
     }
@@ -55,6 +61,7 @@ public class UserDto {
         this.firstName = firstName;
     }
 
+    @NotEmpty
     public String getLastName() {
         return lastName;
     }
@@ -63,11 +70,11 @@ public class UserDto {
         this.lastName = lastName;
     }
 
-    public Set<RoleDto> getRoles() {
-        return roles;
+    public RolesEnum getRole() {
+        return role;
     }
 
-    public void setRoles(Set<RoleDto> roles) {
-        this.roles = roles;
+    public void setRole(RolesEnum role) {
+        this.role = role;
     }
 }

@@ -10,8 +10,10 @@ import ua.goit.model.dao.VendorDao;
 import ua.goit.model.dto.VendorDto;
 import ua.goit.repository.VendorRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class VendorService {
@@ -29,8 +31,19 @@ public class VendorService {
         return vendorConverter.daoToDto(vendorRepository.findById(id).orElseThrow(() -> new VendorNotFoundException(String.format("Vendor with id %s is not found", id))));
     }
 
-    public VendorDto findByName(String name) {
-        return vendorConverter.daoToDto(vendorRepository.findByName(name).orElseThrow(() -> new VendorNotFoundException(String.format("Vendor with name %s is not found", name))));
+    public List<VendorDto> findAll(){
+        List<VendorDao> vendors = vendorRepository.findAllVendors();
+        return vendors.stream()
+                .map(vendorConverter::daoToDto)
+                .collect(Collectors.toList());
+    }
+
+
+    public List<VendorDto> findVendorByName(String name) {
+        List<VendorDao> vendors = vendorRepository.findByNameList(name);
+        return vendors.stream()
+                .map(vendorConverter::daoToDto)
+                .collect(Collectors.toList());
     }
 
     public void save(VendorDto vendor) {
@@ -38,8 +51,25 @@ public class VendorService {
         if (vendorDao.isEmpty()) {
             vendorRepository.save(vendorConverter.dtoToDao(vendor));
         } else {
-            throw new VendorIsAlreadyExistsException(String.format("Vendor with name %s already exists", vendor.getName()));
+            throw new VendorIsAlreadyExistsException(String.format("Vendor with name %s is already exists", vendor.getName()));
         }
     }
 
+    public void update(VendorDto vendor) {
+        Optional<VendorDao> vendorDao = vendorRepository.findById(vendor.getId());
+        if (vendorDao.isPresent()) {
+            vendorDao.get().setName(vendor.getName());
+        } else {
+            throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", vendor.getName()));
+        }
+    }
+
+    public void delete(VendorDto vendor) {
+        Optional<VendorDao> vendorDao = vendorRepository.findByName(vendor.getName());
+        if (vendorDao.isPresent()) {
+           vendorRepository.delete(vendorDao.get());
+        } else {
+            throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", vendor.getName()));
+        }
+    }
 }

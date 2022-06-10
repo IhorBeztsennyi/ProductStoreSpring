@@ -5,6 +5,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "vendor")
+@Cacheable
 public class VendorDao {
     private UUID id;
     private String name;

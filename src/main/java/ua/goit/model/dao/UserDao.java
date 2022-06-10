@@ -1,5 +1,7 @@
 package ua.goit.model.dao;
 
+import ua.goit.model.RolesEnum;
+
 import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
@@ -12,18 +14,18 @@ public class UserDao {
     private String password;
     private String firstName;
     private String lastName;
-    private Set<RoleDao> roles;
+    private RolesEnum role;
 
     public UserDao() {
     }
 
-    public UserDao(UUID id, String email, String password, String firstName, String lastName, Set<RoleDao> roles) {
+    public UserDao(UUID id, String email, String password, String firstName, String lastName, RolesEnum role) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.roles = roles;
+        this.role = role;
     }
 
     @Id
@@ -72,13 +74,13 @@ public class UserDao {
         this.lastName = lastName;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
-    public Set<RoleDao> getRoles() {
-        return roles;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    public RolesEnum getRole() {
+        return role;
     }
 
-    public void setRoles(Set<RoleDao> roles) {
-        this.roles = roles;
+    public void setRole(RolesEnum role) {
+        this.role = role;
     }
 }
