@@ -1,7 +1,6 @@
 package ua.goit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.acls.model.AlreadyExistsException;
 import org.springframework.stereotype.Service;
 import ua.goit.converter.VendorConverter;
 import ua.goit.exceptions.VendorIsAlreadyExistsException;
@@ -31,7 +30,7 @@ public class VendorService {
         return vendorConverter.daoToDto(vendorRepository.findById(id).orElseThrow(() -> new VendorNotFoundException(String.format("Vendor with id %s is not found", id))));
     }
 
-    public List<VendorDto> findAll(){
+    public List<VendorDto> findAll() {
         List<VendorDao> vendors = vendorRepository.findAllVendors();
         return vendors.stream()
                 .map(vendorConverter::daoToDto)
@@ -60,14 +59,14 @@ public class VendorService {
         if (vendorDao.isPresent()) {
             vendorDao.get().setName(vendor.getName());
         } else {
-            throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", vendor.getName()));
+            throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", vendor.getId()));
         }
     }
 
     public void deleteById(UUID id) {
         Optional<VendorDao> vendorDao = vendorRepository.findById(id);
         if (vendorDao.isPresent()) {
-           vendorRepository.deleteById(id);
+            vendorRepository.deleteById(id);
         } else {
             throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", id));
         }

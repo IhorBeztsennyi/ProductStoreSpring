@@ -9,14 +9,7 @@
 
     <body>
         <c:import url="${contextPath}/WEB-INF/html/navibar.jsp"/>
-        <div class="container">
-            <form action="/users/name/">
-                <div class="form-group">
-                    <label for="email">Product name:</label><br>
-                    <input type="text" class="form-control" id="email" placeholder="Enter email" name="email"><br>
-                </div>
-                    <input type="submit" value="Submit">
-            </form>
-        </div>
+
+        <h1> User was deleted </h1>
     </body>
 </html>

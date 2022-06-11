@@ -5,11 +5,8 @@ import org.springframework.stereotype.Service;
 import ua.goit.converter.ProductConverter;
 import ua.goit.exceptions.ProductIsAlreadyExistsException;
 import ua.goit.exceptions.ProductNotFoundException;
-import ua.goit.exceptions.VendorIsAlreadyExistsException;
 import ua.goit.model.dao.ProductDao;
-import ua.goit.model.dao.VendorDao;
 import ua.goit.model.dto.ProductDto;
-import ua.goit.model.dto.VendorDto;
 import ua.goit.repository.ProductRepository;
 
 import java.util.List;

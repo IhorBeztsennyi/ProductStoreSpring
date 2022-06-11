@@ -68,7 +68,7 @@ public class ProductController {
 
     @DeleteMapping
     public ModelAndView deleteProduct(@ModelAttribute("productDto") @Valid ProductDto productDto, BindingResult bindingResult,
-                                     ModelAndView model) {
+                                      ModelAndView model) {
         if (bindingResult.hasErrors()) {
             model.setViewName("deleteProductForm");
             model.setStatus(HttpStatus.BAD_REQUEST);
@@ -81,7 +81,7 @@ public class ProductController {
 
     @PutMapping
     public ModelAndView updateProduct(@ModelAttribute("productDto") @Valid ProductDto productDto, BindingResult bindingResult,
-                                     ModelAndView model) {
+                                      ModelAndView model) {
         if (bindingResult.hasErrors()) {
             model.setViewName("updateProductForm");
             model.setStatus(HttpStatus.BAD_REQUEST);
@@ -95,7 +95,7 @@ public class ProductController {
 
     @PostMapping
     public ModelAndView addProduct(@ModelAttribute("productDto") @Valid ProductDto productDto, BindingResult bindingResult,
-                                  ModelAndView model) {
+                                   ModelAndView model) {
         if (bindingResult.hasErrors()) {
             model.setViewName("addProductForm");
             model.setStatus(HttpStatus.BAD_REQUEST);

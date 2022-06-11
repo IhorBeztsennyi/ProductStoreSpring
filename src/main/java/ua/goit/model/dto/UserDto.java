@@ -3,7 +3,6 @@ package ua.goit.model.dto;
 import ua.goit.model.RolesEnum;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
 public class UserDto {
@@ -43,7 +42,7 @@ public class UserDto {
         this.email = email;
     }
 
-    @NotEmpty
+
     public String getPassword() {
         return password;
     }
@@ -52,7 +51,7 @@ public class UserDto {
         this.password = password;
     }
 
-    @NotEmpty
+
     public String getFirstName() {
         return firstName;
     }
@@ -61,7 +60,7 @@ public class UserDto {
         this.firstName = firstName;
     }
 
-    @NotEmpty
+
     public String getLastName() {
         return lastName;
     }

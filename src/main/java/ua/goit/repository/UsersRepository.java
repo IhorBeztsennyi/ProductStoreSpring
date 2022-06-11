@@ -18,5 +18,8 @@ public interface UsersRepository extends CrudRepository<UserDao, UUID> {
     @Query("SELECT u FROM UserDao u")
     List<UserDao> findAllUsers();
 
+    @Query("SELECT u FROM UserDao u WHERE u.email IN (?1)")
+    List<UserDao> findUserByEmail(String email);
+
 
 }

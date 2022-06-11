@@ -3,7 +3,6 @@ package ua.goit.model.dao;
 import ua.goit.model.RolesEnum;
 
 import javax.persistence.*;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -29,7 +28,7 @@ public class UserDao {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public UUID getId() {
         return id;
     }

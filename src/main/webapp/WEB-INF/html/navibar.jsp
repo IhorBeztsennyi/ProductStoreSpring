@@ -30,7 +30,7 @@
                         <li><a href="/users/all">Show all</a></li>
                         <li><a href="/users/form/find">Find by email</a></li>
                         <li><a href="${pageContext.request.contextPath}/users/registration">Create new</a></li>
-                        <li><a href="/users/form/update">Update</a></li>
+                        <li><a href="/users/form/update">Appoint admin</a></li>
                         <li><a href="/users/form/delete">Delete</a></li>
                    </ul>
                   </li>

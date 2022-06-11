@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.model.dto.VendorDto;
@@ -62,21 +61,21 @@ public class VendorController {
 
     @PutMapping
     public ModelAndView updateVendor(@ModelAttribute("vendorDto") @Valid VendorDto vendorDto, BindingResult bindingResult,
-                                ModelAndView model) {
+                                     ModelAndView model) {
         if (bindingResult.hasErrors()) {
             model.setViewName("updateVendorForm");
             model.setStatus(HttpStatus.BAD_REQUEST);
             return model;
         }
         vendorService.update(vendorDto);
-        model.setViewName("vendorAdded");
+        model.setViewName("vendorUpdated");
         model.setStatus(HttpStatus.CREATED);
         return model;
     }
 
     @PostMapping
     public ModelAndView addVendor(@ModelAttribute("vendorDto") @Valid VendorDto vendorDto, BindingResult bindingResult,
-                                ModelAndView model) {
+                                  ModelAndView model) {
         if (bindingResult.hasErrors()) {
             model.setViewName("addVendorForm");
             model.setStatus(HttpStatus.BAD_REQUEST);
@@ -90,7 +89,7 @@ public class VendorController {
 
     @DeleteMapping
     public ModelAndView deleteVendor(@ModelAttribute("vendorDto") @Valid VendorDto vendorDto, BindingResult bindingResult,
-                                  ModelAndView model) {
+                                     ModelAndView model) {
         if (bindingResult.hasErrors()) {
             model.setViewName("deleteVendorForm");
             model.setStatus(HttpStatus.BAD_REQUEST);
@@ -101,10 +100,8 @@ public class VendorController {
         return model;
     }
 
-
     @ModelAttribute
     public VendorDto getDefaultVendorDto() {
         return new VendorDto();
     }
-
 }
