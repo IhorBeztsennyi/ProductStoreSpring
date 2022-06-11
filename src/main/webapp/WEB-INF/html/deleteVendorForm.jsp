@@ -14,8 +14,8 @@
         <div class="container">
             <form:form action="/vendors/" method="DELETE" modelAttribute="vendorDto">
                 <div class="form-group">
-                    <form:label path="name">Vendor name you want to delete:</form:label><br>
-                    <form:input type="text" class="form-control" id="vendorName" placeholder="Enter vendor name" name="vendorName" path="name"/><form:errors path="name" style="color:red"/><br>
+                    <form:label path="id">Vendor name you want to delete:</form:label><br>
+                    <form:input type="text" class="form-control" id="vendorId" placeholder="Enter vendor id" name="vendorId" path="id"/><form:errors path="id" style="color:red"/><br>
                 </div>
                     <input type="submit" value="Submit"/>
            </form:form>

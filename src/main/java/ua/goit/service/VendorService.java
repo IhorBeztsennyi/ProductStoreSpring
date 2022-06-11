@@ -64,12 +64,12 @@ public class VendorService {
         }
     }
 
-    public void delete(VendorDto vendor) {
-        Optional<VendorDao> vendorDao = vendorRepository.findByName(vendor.getName());
+    public void deleteById(UUID id) {
+        Optional<VendorDao> vendorDao = vendorRepository.findById(id);
         if (vendorDao.isPresent()) {
-           vendorRepository.delete(vendorDao.get());
+           vendorRepository.deleteById(id);
         } else {
-            throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", vendor.getName()));
+            throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", id));
         }
     }
 }

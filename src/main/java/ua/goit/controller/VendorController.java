@@ -96,7 +96,7 @@ public class VendorController {
             model.setStatus(HttpStatus.BAD_REQUEST);
             return model;
         }
-        vendorService.delete(vendorDto);
+        vendorService.deleteById(vendorDto.getId());
         model.setViewName("vendorDeleted");
         return model;
     }
