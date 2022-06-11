@@ -28,8 +28,8 @@
                   <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
                    <ul class="dropdown-menu">
                         <li><a href="/users/all">Show all</a></li>
-                        <li><a href="/users/form/find">Find by name</a></li>
-                        <li><a href="/users/form/add">Add new</a></li>
+                        <li><a href="/users/form/find">Find by email</a></li>
+                        <li><a href="${pageContext.request.contextPath}/users/registration">Create new</a></li>
                         <li><a href="/users/form/update">Update</a></li>
                         <li><a href="/users/form/delete">Delete</a></li>
                    </ul>

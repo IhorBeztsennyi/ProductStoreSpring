@@ -5,15 +5,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.goit.exceptions.UserIsAlreadyExistsException;
 import ua.goit.model.dto.UserDto;
+import ua.goit.model.dto.VendorDto;
 import ua.goit.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/users")
@@ -52,5 +51,23 @@ public class UserController {
     @ModelAttribute("userForm")
     public UserDto getDefaultUserDto() {
         return new UserDto();
+    }
+
+    @GetMapping(path = "/all")
+    public String getAllUsers(Model model) {
+        List<UserDto> users = userService.findAll();
+        model.addAttribute("users", users);
+        return "usersList";
+    }
+
+    @GetMapping(path = "/form/find")
+    public String getUsersForm() {
+        return "findUserForm";
+    }
+    @GetMapping(path = "/name/")
+    public String getVendor(@RequestParam("email") String email, Model model) {
+        List<VendorDto> vendors = userService.findUserByName(vendorName);
+        model.addAttribute("vendors", vendors);
+        return "findVendor";
     }
 }
