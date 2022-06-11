@@ -1,6 +1,7 @@
 package ua.goit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ua.goit.converter.VendorConverter;
 import ua.goit.exceptions.VendorIsAlreadyExistsException;
@@ -64,10 +65,9 @@ public class VendorService {
     }
 
     public void deleteById(UUID id) {
-        Optional<VendorDao> vendorDao = vendorRepository.findById(id);
-        if (vendorDao.isPresent()) {
+        try {
             vendorRepository.deleteById(id);
-        } else {
+        } catch (EmptyResultDataAccessException e) {
             throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", id));
         }
     }
