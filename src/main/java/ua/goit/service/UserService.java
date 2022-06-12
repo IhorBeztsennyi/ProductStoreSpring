@@ -33,10 +33,35 @@ public class UserService {
         userRepository.save(userConverter.dtoToDao(user));
     }
 
-    public void update(UserDto user) {
+    public void updateToAdmin(UserDto user) {
         Optional<UserDao> userDao = userRepository.findById(user.getId());
         if (userDao.isPresent()) {
-            userDao.get().setRole(RolesEnum.ROLE_ADMIN);
+           UserDao userOld = userDao.get();
+            UserDao userDaoNew = new UserDao();
+            userDaoNew.setId(userOld.getId());
+            userDaoNew.setFirstName(userOld.getLastName());
+            userDaoNew.setLastName(userOld.getLastName());
+            userDaoNew.setPassword(userOld.getPassword());
+            userDaoNew.setRole(RolesEnum.ROLE_ADMIN);
+            userDaoNew.setEmail(userOld.getEmail());
+            userRepository.save(userDaoNew);
+        } else {
+            throw new UserIsAlreadyExistsException(String.format("User with id %s is not exists", user.getId()));
+        }
+    }
+
+    public void updateToUser(UserDto user) {
+        Optional<UserDao> userDao = userRepository.findById(user.getId());
+        if (userDao.isPresent()) {
+            UserDao userOld = userDao.get();
+            UserDao userDaoNew = new UserDao();
+            userDaoNew.setId(userOld.getId());
+            userDaoNew.setFirstName(userOld.getLastName());
+            userDaoNew.setLastName(userOld.getLastName());
+            userDaoNew.setPassword(userOld.getPassword());
+            userDaoNew.setRole(RolesEnum.ROLE_USER);
+            userDaoNew.setEmail(userOld.getEmail());
+            userRepository.save(userDaoNew);
         } else {
             throw new UserIsAlreadyExistsException(String.format("User with id %s is not exists", user.getId()));
         }

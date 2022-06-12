@@ -12,7 +12,7 @@
     <body>
         <c:import url="${contextPath}/WEB-INF/html/navibar.jsp"/>
         <div class="container">
-            <form:form action="/products/" method="DELETE" modelAttribute="productDto">
+           <form:form action="/products/delete" method="delete" modelAttribute="productDto">
                 <div class="form-group">
                     <form:label path="name">Product name you want to delete:</form:label><br>
                     <form:input type="text" class="form-control" id="productName" placeholder="Enter product name" name="productName" path="name"/><form:errors path="name" style="color:red"/><br>

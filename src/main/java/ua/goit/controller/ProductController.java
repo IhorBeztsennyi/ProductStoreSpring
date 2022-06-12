@@ -66,7 +66,7 @@ public class ProductController {
         return "addProductForm";
     }
 
-    @DeleteMapping
+    @PostMapping(path = "/delete")
     public ModelAndView deleteProduct(@ModelAttribute("productDto") @Valid ProductDto productDto, BindingResult bindingResult,
                                       ModelAndView model) {
         if (bindingResult.hasErrors()) {
@@ -79,7 +79,7 @@ public class ProductController {
         return model;
     }
 
-    @PutMapping
+    @PostMapping(path = "/update")
     public ModelAndView updateProduct(@ModelAttribute("productDto") @Valid ProductDto productDto, BindingResult bindingResult,
                                       ModelAndView model) {
         if (bindingResult.hasErrors()) {

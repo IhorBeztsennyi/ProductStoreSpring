@@ -25,15 +25,18 @@
                          <li><a href="/products/form/delete">Delete</a></li>
                     </ul>
                   </li>
+                <security:authorize access="hasRole('ROLE_ADMIN')">
                   <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
                    <ul class="dropdown-menu">
                         <li><a href="/users/all">Show all</a></li>
                         <li><a href="/users/form/find">Find by email</a></li>
                         <li><a href="${pageContext.request.contextPath}/users/registration">Create new</a></li>
-                        <li><a href="/users/form/update">Appoint admin</a></li>
+                        <li><a href="/users/form/update/admin">Up to admin</a></li>
+                        <li><a href="/users/form/update/user">Down to user</a></li>
                         <li><a href="/users/form/delete">Delete</a></li>
                    </ul>
                   </li>
+                </security:authorize>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>

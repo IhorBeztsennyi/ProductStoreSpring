@@ -18,12 +18,13 @@
     <body>
         <c:import url="${contextPath}/WEB-INF/html/navibar.jsp"/>
         <div class="container">
-            <form:form action="/users/" method="put" modelAttribute="userForm">
+            <form:form action="/users/update/user" method="post" modelAttribute="userForm">
                 <div class="form-group">
                    <form:label path="id">User id:</form:label><br>
                    <form:input type="text" class="form-control" id="userId" placeholder="Enter user id" name="userId" path="id"/><form:errors path="id" style="color:red"/><br>
                 </div>
-                    <input type="submit" value="Admin"/>
+
+                    <input type="submit" value="User"/>
            </form:form>
             <c:if test="${not empty errorMessage}">
               <c:forEach items="${errorMessage.errors}" var="error">

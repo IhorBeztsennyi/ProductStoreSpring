@@ -58,7 +58,11 @@ public class VendorService {
     public void update(VendorDto vendor) {
         Optional<VendorDao> vendorDao = vendorRepository.findById(vendor.getId());
         if (vendorDao.isPresent()) {
-            vendorDao.get().setName(vendor.getName());
+            VendorDao old = vendorDao.get();
+            VendorDao dao = new VendorDao();
+            dao.setId(old.getId());
+            dao.setName(vendor.getName());
+            vendorRepository.save(dao);
         } else {
             throw new VendorIsAlreadyExistsException(String.format("Vendor with id %s is not exists", vendor.getId()));
         }

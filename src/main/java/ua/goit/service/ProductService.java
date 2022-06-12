@@ -56,8 +56,13 @@ public class ProductService {
     public void update(ProductDto product) {
         Optional<ProductDao> productDao = productRepository.findById(product.getId());
         if (productDao.isPresent()) {
-            productDao.get().setName(product.getName());
-            productDao.get().setPrice(product.getPrice());
+            ProductDao old = productDao.get();
+            ProductDao productNew = new ProductDao();
+            productNew.setId(old.getId());
+            productNew.setName(product.getName());
+            productNew.setPrice(product.getPrice());
+            productNew.setVendor(old.getVendor());
+            productRepository.save(productNew);
         } else {
             throw new ProductIsAlreadyExistsException(String.format("Product with id %s is not exists", product.getName()));
         }

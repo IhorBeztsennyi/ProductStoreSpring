@@ -28,7 +28,7 @@ public class UserDao {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     public UUID getId() {
         return id;
     }

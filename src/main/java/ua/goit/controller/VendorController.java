@@ -59,7 +59,7 @@ public class VendorController {
         return "findVendor";
     }
 
-    @PutMapping
+    @PostMapping(path = "/update")
     public ModelAndView updateVendor(@ModelAttribute("vendorDto") @Valid VendorDto vendorDto, BindingResult bindingResult,
                                      ModelAndView model) {
         if (bindingResult.hasErrors()) {
@@ -87,7 +87,7 @@ public class VendorController {
         return model;
     }
 
-    @DeleteMapping
+    @PostMapping(path = "/delete")
     public ModelAndView deleteVendor(@ModelAttribute("vendorDto") @Valid VendorDto vendorDto, BindingResult bindingResult,
                                      ModelAndView model) {
         if (bindingResult.hasErrors()) {

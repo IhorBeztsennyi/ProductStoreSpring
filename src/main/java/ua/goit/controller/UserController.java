@@ -2,6 +2,7 @@ package ua.goit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +56,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getAllUsers(Model model) {
         List<UserDto> users = userService.findAll();
         model.addAttribute("users", users);
@@ -62,6 +64,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/form/find")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getUsersForm() {
         return "findUserForm";
     }
@@ -73,31 +76,56 @@ public class UserController {
         return "findUser";
     }
 
-    @GetMapping(path = "/form/update")
-    public String getUserUpdateForm() {
-        return "updateUserForm";
+    @GetMapping(path = "/form/update/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String getUserUpdateToAdminForm() {
+        return "updateAdminUserForm";
+    }
+
+    @GetMapping(path = "/form/update/user")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String getUserUpdateToUserForm() {
+        return "updateUserUserForm";
     }
 
     @GetMapping(path = "/form/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getUserDeleteForm() {
         return "deleteUserForm";
     }
 
-    @PutMapping
-    public ModelAndView updateUser(@ModelAttribute("userForm") @Valid UserDto userDto, BindingResult bindingResult,
+    @PostMapping (path = "/update/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView updateToAdmin(@ModelAttribute("userForm") @Valid UserDto userDto, BindingResult bindingResult,
                                    ModelAndView model) {
         if (bindingResult.hasErrors()) {
             model.setViewName("updateUserForm");
             model.setStatus(HttpStatus.BAD_REQUEST);
             return model;
         }
-        userService.update(userDto);
+        userService.updateToAdmin(userDto);
         model.setViewName("userUpdated");
         model.setStatus(HttpStatus.CREATED);
         return model;
     }
 
-    @DeleteMapping
+    @PostMapping (path = "/update/user")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView updateToUser(@ModelAttribute("userForm") @Valid UserDto userDto, BindingResult bindingResult,
+                                   ModelAndView model) {
+        if (bindingResult.hasErrors()) {
+            model.setViewName("updateUserForm");
+            model.setStatus(HttpStatus.BAD_REQUEST);
+            return model;
+        }
+        userService.updateToUser(userDto);
+        model.setViewName("userUpdated");
+        model.setStatus(HttpStatus.CREATED);
+        return model;
+    }
+
+    @PostMapping(path = "/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView deleteUser(@ModelAttribute("userForm") @Valid UserDto userDto, BindingResult bindingResult,
                                    ModelAndView model) {
         if (bindingResult.hasErrors()) {

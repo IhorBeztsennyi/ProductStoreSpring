@@ -24,7 +24,7 @@ public class ProductDao {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     public UUID getId() {
         return id;
     }
@@ -51,7 +51,7 @@ public class ProductDao {
         this.price = price;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "vendor_id", nullable = false)
     public VendorDao getVendor() {
         return vendor;
