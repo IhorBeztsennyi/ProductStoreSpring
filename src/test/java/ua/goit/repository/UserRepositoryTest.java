@@ -5,16 +5,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ua.goit.model.RolesEnum;
 import ua.goit.model.dao.UserDao;
-import ua.goit.model.dao.VendorDao;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -30,7 +27,6 @@ public class UserRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
-
 
     @Test
     public void findByNameMustReturnVendorDao() {
@@ -59,8 +55,8 @@ public class UserRepositoryTest {
         return user;
     }
 
-    private void persistUserDao(){
+    private void persistUserDao() {
         entityManager.persist(createUserDao());
         entityManager.flush();
-    };
+    }
 }

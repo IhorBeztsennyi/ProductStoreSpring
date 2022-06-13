@@ -40,5 +40,4 @@ public class VendorRepositoryTest {
         entityManager.persist(vendor);
         entityManager.flush();
     }
-
 }

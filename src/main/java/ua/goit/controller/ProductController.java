@@ -75,7 +75,7 @@ public class ProductController {
             return model;
         }
         productService.delete(productDto);
-        model.setViewName("vendorDeleted");
+        model.setViewName("productDeleted");
         return model;
     }
 

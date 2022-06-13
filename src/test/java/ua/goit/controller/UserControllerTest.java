@@ -18,9 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import ua.goit.model.RolesEnum;
 import ua.goit.model.dao.UserDao;
-import ua.goit.model.dao.VendorDao;
 import ua.goit.repository.UsersRepository;
-import ua.goit.repository.VendorRepository;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,7 +36,7 @@ public class UserControllerTest {
     private WebApplicationContext context;
 
     @Autowired
-    private  PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @MockBean
     private UsersRepository usersRepository;
@@ -56,7 +54,7 @@ public class UserControllerTest {
     @Test
     @WithMockUser(roles = "ADMIN")
     void testFindUserByNameMustReturnUserDao() throws Exception {
-       UserDao user = createUserDao();
+        UserDao user = createUserDao();
         when(usersRepository.findUserByEmail("user@gmail.com")).thenReturn(List.of(user));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/users/name/?email=user@gmail.com"))

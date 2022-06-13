@@ -12,7 +12,6 @@ import ua.goit.model.dao.ProductDao;
 import ua.goit.model.dao.VendorDao;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -35,7 +34,6 @@ public class ProductRepositoryTest {
         //when
         ProductDao product = productRepository.findByName("X67").get();
         //then
-
         assertThat(product.getId(), notNullValue());
         assertThat(product.getName(), is("X67"));
         assertThat(product.getVendor().getId(), notNullValue());

@@ -84,6 +84,4 @@ public class VendorControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(302))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("http://localhost/login"));
     }
-
-
 }
