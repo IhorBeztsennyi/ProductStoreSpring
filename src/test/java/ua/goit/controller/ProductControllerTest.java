@@ -49,7 +49,6 @@ public class ProductControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
     void testFindProductByNameMustReturnProductDao() throws Exception {
         ProductDao product = createProductDao();
         when(productRepository.findByNameList("X67")).thenReturn(List.of(product));

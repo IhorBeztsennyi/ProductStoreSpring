@@ -6,7 +6,8 @@ plugins {
 
 group = 'ua.goit'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
 	mavenCentral()
@@ -35,6 +36,6 @@ dependencies {
 	testImplementation group: 'com.h2database', name: 'h2', version: '2.1.212'
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
 }
